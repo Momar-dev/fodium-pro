@@ -23,6 +23,12 @@ import {
   Edit3,
   Trash2,
   Globe,
+  Store,
+  Utensils,
+  Truck,
+  ChefHat,
+  QrCode,
+  BarChart3,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useProData } from '../context/ProDataContext';
@@ -54,6 +60,8 @@ export const EventManagement: React.FC = () => {
     | 'vendors'
     | 'agents'
     | 'partners'
+    | 'stands'
+    | 'restauration'
     | 'control'
     | 'documents'
   >('overview');
@@ -96,6 +104,8 @@ export const EventManagement: React.FC = () => {
     { id: 'vendors', label: `Vendeurs (${eventVendors.length})`, icon: Users },
     { id: 'agents', label: `Agents (${eventAgents.length})`, icon: Shield },
     { id: 'partners', label: `Partenaires (${eventPartners.length})`, icon: Handshake },
+    { id: 'stands', label: 'Stands', icon: Store },
+    { id: 'restauration', label: 'Restauration', icon: Utensils },
     { id: 'control', label: 'Contrôle d’accès', icon: Scan },
     { id: 'documents', label: 'Documents & Rapport', icon: FileText },
   ];
@@ -796,6 +806,174 @@ export const EventManagement: React.FC = () => {
             </div>
           </div>
 
+<div className="space-y-3">
+            <div className="p-4 rounded-2xl bg-[#0B0F17] border border-slate-800 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <FileText className="w-5 h-5 text-orange-400" />
+                <div>
+                  <div className="text-xs font-bold text-white">
+                    Bordereau Officiel des Recettes Billetterie (SODAV)
+                  </div>
+                  <div className="text-[10px] text-slate-400">
+                    Déclaration certifiée des 742 billets vendus pour les droits d'auteurs
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => alert('Téléchargement du bordereau officiel SODAV généré en PDF.')}
+                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white flex items-center gap-1.5 cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Télécharger</span>
+              </button>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-[#0B0F17] border border-slate-800 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <Receipt className="w-5 h-5 text-emerald-400" />
+                <div>
+                  <div className="text-xs font-bold text-white">
+                    Rapport de Clôture & Rapprochement Bancaire Wave / OM
+                  </div>
+                  <div className="text-[10px] text-slate-400">
+                    Relevé détaillé des 1 860 000 FCFA avec références de transactions
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => alert('Téléchargement du relevé financier complet généré en PDF.')}
+                className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white flex items-center gap-1.5 cursor-pointer"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Télécharger</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TAB CONTENT 10: STANDS */}
+      {activeTab === 'stands' && (
+        <div className="p-6 rounded-3xl bg-[#121824] border border-slate-800 space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                Gestion des Stands & Espaces Exposants
+              </h3>
+              <p className="text-xs text-slate-400">
+                Création, tarification, réservation et suivi des stands événementiels
+              </p>
+            </div>
+            <button
+              type="button"
+              className="px-3 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[3]" />
+              <span>Créer un stand</span>
+            </button>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-4 h-4" />
+              <span className="font-semibold">Module en cours de développement</span>
+            </div>
+            <p>Les fonctionnalités complètes de gestion des stands (création, tarifs, réservation, paiement, facturation, attribution) seront disponibles dans la prochaine version de Fodium Pro.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { icon: Store, label: 'Création stands', desc: 'Définir zones, tailles, catégories' },
+              { icon: DollarSign, label: 'Tarification', desc: 'Prix par m², packs exposants' },
+              { icon: Calendar, label: 'Réservation', desc: 'Booking en ligne + paiement' },
+              { icon: FileText, label: 'Contrats', desc: 'Génération bail & factures' },
+              { icon: MapPin, label: 'Plan interactif', desc: 'Attribution emplacements visuels' },
+              { icon: TrendingUp, label: 'Suivi taux remplissage', desc: 'Disponible / Réservé / Libre' },
+            ].map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <div key={idx} className="p-4 rounded-2xl bg-[#0B0F17] border border-slate-800 text-center space-y-2 opacity-60">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800/80 flex items-center justify-center mx-auto text-slate-500">
+                    <IconComp className="w-5 h-5" />
+                  </div>
+                  <div className="font-semibold text-white text-sm">{item.label}</div>
+                  <div className="text-[11px] text-slate-400">{item.desc}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* TAB CONTENT 11: RESTAURATION */}
+      {activeTab === 'restauration' && (
+        <div className="p-6 rounded-3xl bg-[#121824] border border-slate-800 space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                Tickets & Bons de Restauration
+              </h3>
+              <p className="text-xs text-slate-400">
+                Gestion des repas, boissons et validations aux points de vente
+              </p>
+            </div>
+            <button
+              type="button"
+              className="px-3 py-2 rounded-xl bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[3]" />
+              <span>Créer un ticket resto</span>
+            </button>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-4 h-4" />
+              <span className="font-semibold">Module en cours de développement</span>
+            </div>
+            <p>La gestion des tickets restauration (création types, distribution, scan validation, réconciliation fournisseurs) sera disponible dans la prochaine version de Fodium Pro.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { icon: Utensils, label: 'Types de tickets', desc: 'Repas complet, snack, boisson, VIP' },
+              { icon: QrCode, label: 'QR Validation', desc: 'Scan unique au point de vente' },
+              { icon: Truck, label: 'Logistique fournisseurs', desc: 'Livraison, stocks, réappro' },
+              { icon: ChefHat, label: 'Menus & régimes', desc: 'Végétarien, halal, allergènes' },
+              { icon: DollarSign, label: 'Facturation', desc: 'Rapprochement conso / factures' },
+              { icon: BarChart3, label: 'Analytics conso', desc: 'Pics, gaspillage, satisfaction' },
+            ].map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <div key={idx} className="p-4 rounded-2xl bg-[#0B0F17] border border-slate-800 text-center space-y-2 opacity-60">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800/80 flex items-center justify-center mx-auto text-slate-500">
+                    <IconComp className="w-5 h-5" />
+                  </div>
+                  <div className="font-semibold text-white text-sm">{item.label}</div>
+                  <div className="text-[11px] text-slate-400">{item.desc}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* TAB CONTENT 12: DOCUMENTS & RAPPORT */}
+      {activeTab === 'documents' && (
+        <div className="p-6 rounded-3xl bg-[#121824] border border-slate-800 space-y-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+                Rapports Officiels & Documents Légaux
+              </h3>
+              <p className="text-xs text-slate-400">
+                Génération des attestations, bordereaux SACEM/SODAV et clôture
+              </p>
+            </div>
+          </div>
+
           <div className="space-y-3">
             <div className="p-4 rounded-2xl bg-[#0B0F17] border border-slate-800 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -844,7 +1022,6 @@ export const EventManagement: React.FC = () => {
         </div>
       )}
 
-      {/* Edit Event Modal */}
       <EditEventModal
         isOpen={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}
